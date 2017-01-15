@@ -7,7 +7,8 @@ gem 'rails', '4.2.7.1'
 #gem 'sqlite3'
 
 gem 'mysql2'
-gem 'bing_translator'
+#gem 'bing_translator'
+gem "bing_translator", "~> 4.5.0"
 gem 'bootstrap', '~> 4.0.0.alpha3'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

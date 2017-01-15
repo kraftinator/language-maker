@@ -11,11 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114005514) do
+ActiveRecord::Schema.define(version: 20170114205645) do
+
+  create_table "constructed_languages", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "constructed_word_sources", force: :cascade do |t|
+    t.integer "constructed_word_id", limit: 4
+    t.integer "natural_word_id",     limit: 4
+  end
+
+  create_table "constructed_words", force: :cascade do |t|
+    t.integer  "constructed_language_id", limit: 4
+    t.integer  "word_id",                 limit: 4
+    t.string   "text",                    limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "natural_language_families", force: :cascade do |t|
     t.integer "parent_id", limit: 4
     t.string  "name",      limit: 255
+    t.string  "code",      limit: 255
+    t.string  "url",       limit: 255
+  end
+
+  create_table "natural_languages", force: :cascade do |t|
+    t.string  "name",                       limit: 255
+    t.string  "code",                       limit: 255
+    t.boolean "active"
+    t.integer "natural_language_family_id", limit: 4
+    t.string  "url",                        limit: 255
+  end
+
+  create_table "natural_words", force: :cascade do |t|
+    t.integer  "word_id",             limit: 4
+    t.integer  "natural_language_id", limit: 4
+    t.string   "text",                limit: 255
+    t.string   "original_text",       limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  create_table "word_types", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.integer  "natural_language_id", limit: 4
+    t.integer  "word_type_id",        limit: 4
+    t.string   "text",                limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end
