@@ -1,0 +1,2 @@
+module ConstructedLanguagesHelper
+end

@@ -1,0 +1,11 @@
+<h1 class="text-primary">Create Language</h1>
+<br>
+<div class="row">
+  <div class="col-lg-4">
+    <%= form_for(@constructed_language) do |f| %>
+      <%= f.text_field :name %>
+      <br><br>
+      <%= submit_tag "SAVE", {:class=>'btn btn-primary'} %>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Back", constructed_languages_path %><br>
+    <% end %>
+  </div>
+</div>
