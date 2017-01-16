@@ -15,6 +15,20 @@ end
 ## Destroy previous seeds
 NaturalLanguage.destroy_all
 NaturalLanguageFamily.destroy_all
+WordType.destroy_all
+
+## Create Word Types
+puts "Create word types"
+i = 0
+add_row( WordType.new( :name => "noun", ), i+=1 )
+add_row( WordType.new( :name => "verb", ), i+=1 )
+add_row( WordType.new( :name => "adjective", ), i+=1 )
+add_row( WordType.new( :name => "adverb", ), i+=1 )
+add_row( WordType.new( :name => "pronoun", ), i+=1 )
+add_row( WordType.new( :name => "preposition", ), i+=1 )
+add_row( WordType.new( :name => "conjunction", ), i+=1 )
+add_row( WordType.new( :name => "determiner", ), i+=1 )
+add_row( WordType.new( :name => "numeral", ), i+=1 )
 
 ## Create Natural Language Families
 puts "Creating natural language families"

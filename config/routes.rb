@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  #get 'words/index'
+  #get 'words/show'
+  #get 'words/new'
+  #get 'words/edit'
+
   #get 'constructed_languages/index'
   #get 'constructed_languages/show'
   #get 'constructed_languages/new'
@@ -7,6 +12,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   
   resources :constructed_languages
+  resources :words
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+<% if flash[:alert] %>
+  <div class="alert alert-dismissable alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <% if flash[:alert].is_a? Array %>
+      <%= flash[:alert].first %>
+      <ul>
+        <% flash[:alert][1..flash[:alert].size].each do |alert| %>
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <%= flash[:alert] %>
+    <% end %>
+  </div>
+<% end %>
 
 <%= yield %>
+
+<%= render partial: "layouts/footer" %>
 
 </body>
 </html>
