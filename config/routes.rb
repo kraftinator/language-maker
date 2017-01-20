@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   #get 'constructed_languages/edit'
 
   get 'welcome/index'
+  #get 'words/import' => 'words#import'
+  #get 'words/import'
+  get 'words/import/:id' => 'words#import', as: :import_words
   
   resources :constructed_languages
   resources :words

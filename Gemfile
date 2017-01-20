@@ -9,6 +9,9 @@ gem 'rails', '4.2.7.1'
 gem 'mysql2'
 #gem 'bing_translator'
 gem "bing_translator", "~> 4.5.0"
+gem 'easy_translate'
+gem 'translit'
+gem 'russian'
 gem 'httparty'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 source 'https://rails-assets.org' do
