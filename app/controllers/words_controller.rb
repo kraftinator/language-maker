@@ -48,6 +48,39 @@ class WordsController < ApplicationController
   
   def import
     
+    ## Set API Key
+    EasyTranslate.api_key = ENV['GOOGLE_TRANSLATE_API_KEY']
+    #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+    OpenSSL::SSL.const_set(:VERIFY_PEER, OpenSSL::SSL::VERIFY_NONE)
+
+    #NaturalLanguage.where( active: true ).each do |language|
+    NaturalLanguage.where( active: true )[35..40].each do |language|
+      ## Translate word
+      result = EasyTranslate.translate( @word.text, :from => @word.natural_language.code, :to => language.code )
+      ## Show output
+      puts "#{language.name}: #{result}"
+      ## Do not duplicate
+      nw  = NaturalWord.where( word: @word, natural_language: language )
+      next unless nw.empty?
+      ## Create new natural word
+      #NaturalWord.create( word: @word, natural_language: language, original_text: result.downcase, text: I18n.transliterate( result ).downcase )
+      NaturalWord.create( word: @word, natural_language: language, original_text: result.downcase, text: transliterate( language, result ).downcase )
+    end
+
+    redirect_to word_path( @word )
+    
+  end
+  
+  def transliterate( language, text )
+    if language.code == "ru"
+      return Russian.transliterate( text )
+    else
+      return I18n.transliterate( text )
+    end
+  end
+  
+  def import_old
+    
     ## Get client
     client = BingTranslator.new( ENV['BING_TRANSLATOR_CLIENT_ID'], ENV['BING_TRANSLATOR_SECRET'], 
         false, ENV['BING_TRANSLATOR_ACCOUNT_KEY'] )
@@ -79,7 +112,7 @@ class WordsController < ApplicationController
   end
   
   def load_word_attributes
-    @natural_languages = NaturalLanguage.all.order( "name" )
+    @natural_languages = NaturalLanguage.all.where( active: true ).order( "name" )
     @word_types = WordType.all.order( "name" )
   end
   
